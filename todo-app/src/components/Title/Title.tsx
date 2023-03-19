@@ -1,6 +1,10 @@
-import { Wrapper,Content,TitleText, Edit } from './Title.styles'
+import { Wrapper,Content,TitleText, Edit } from './Title.styles';
+import {useState} from 'react';
+import Modal from '../EditModal/EditModal';
 
 export default function Title() {
+    const [isOpen,setIsOpen] = useState(false);
+
     return (
     <Wrapper>
         <Content>
@@ -9,11 +13,16 @@ export default function Title() {
                 Temp Title
             </TitleText>
 
-            <Edit>
+            <Edit onClick={() => setIsOpen(true)}>
                 Edit
             </Edit>
+
             
         </Content>
+        <Modal open={isOpen} onClose={() => setIsOpen(false)}>
+            Fancy Modal
+        </Modal>
+            
     </Wrapper>
     )
 }

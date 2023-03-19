@@ -29,11 +29,10 @@ export const TitleText = styled.div`
 
 
 export const Edit = styled.button`
-    width:35px;
-    width:70px;
+    height:25px;
+    width:80px;
     border-radius: 15px;
     border: 1px solid black;
-    /* margin-right: 5px; */
     margin-left: auto;
     margin-right: 10px;
 `
