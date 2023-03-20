@@ -1,4 +1,5 @@
 import Title from '../Title/Title'
+import TodoItem from '../TodoItem/TodoItem'
 import { Content, Wrapper } from './Todo.styles'
 
 export default function Todo() {
@@ -6,6 +7,7 @@ export default function Todo() {
     <Wrapper>
         <Content>
             <Title/>
+            <TodoItem/>
         </Content>
     </Wrapper>
   )

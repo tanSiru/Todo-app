@@ -1,4 +1,4 @@
-import { Wrapper,Content,TitleText, Edit } from './Title.styles';
+import { Wrapper,Content,TitleText, Edit, Form, Limit, NewTitle, Submit } from './Title.styles';
 import {useState} from 'react';
 import Modal from '../EditModal/EditModal';
 
@@ -8,7 +8,8 @@ export default function Title() {
 
     const[text,setText] = useState("")
 
-    const limit = 30;
+    const limit = 20;
+    const check = text.length === limit ? true : false;
 
     function handleChange(event:any) {
         setText(event.target.value.slice(0, limit))
@@ -41,7 +42,15 @@ export default function Title() {
 
             
         </Content>
-        <Modal open={isOpen} onClose={onClose} handleChange={handleChange} text={text} limit={limit} onSubmit={onSubmit}/>
+        <Modal open={isOpen} onClose={onClose} handleChange={handleChange} text={text} limit={limit} onSubmit={onSubmit}>
+            What would you like to change the title to?
+
+            <Form onSubmit={onSubmit}>
+                <NewTitle  limit={check} value={text} onChange={handleChange}/>
+                {check && <Limit>Max limit is {limit} chars!</Limit>}
+                <Submit/>
+            </Form>
+        </Modal>
             
             
     </Wrapper>

@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 
-type Props = {
-    limit:boolean;
-}
+
 
 export const Wrapper = styled.div`
     position: fixed;
@@ -48,35 +46,4 @@ export const Button = styled.button`
     justify-items: center;
     align-items:center;
 `
-
-export const Form = styled.form`
-    width:500px;
-    height:300px;
-    align-self: center;
-`;
-
-export const NewTitle = styled.textarea<Props>`
-    width:500px;
-    height:150px;
-    border:${props=>props.limit ? "1px solid red" : "1px solid black"};
-    font-size:20px;
-    :focus{
-        outline:none;
-    }
-    `;
-
-export const Limit = styled.div`
-    font-size: 20px;
-    font-weight: bold;
-    color:red;
-`;
-
-export const Submit = styled.input.attrs({type:"submit"})`
-    height:25px;
-    width:80px;
-    border-radius: 15px;
-    border: 1px solid black;
-    margin-left: auto;
-    margin-right: 10px;
-    `;
 

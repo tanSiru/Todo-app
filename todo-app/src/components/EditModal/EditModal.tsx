@@ -1,11 +1,10 @@
 import {createPortal} from "react-dom";
-import { Button, Content, Form, Limit, NewTitle, Submit, Wrapper } from "./EditModal.styles";
+import { Button, Content, Wrapper} from "./EditModal.styles";
 
-export default function Modal({ open, handleChange, onClose, text, limit, onSubmit }:any) {
+export default function Modal({ open, children, onClose }:any) {
 
     if (!open) return null
 
-    const check = text.length === limit ? true : false;
 
 
     return createPortal(
@@ -16,11 +15,7 @@ export default function Modal({ open, handleChange, onClose, text, limit, onSubm
             <Button onClick={onClose}>X</Button>
             What would you like to change the title to?
 
-            <Form onSubmit={onSubmit}>
-                <NewTitle  limit={check} value={text} onChange={handleChange}/>
-                {check && <Limit>Max limit is 30 chars!</Limit>}
-                <Submit/>
-            </Form>
+            {children}
         </Content>
     </>,
     document.getElementById('modal')!
