@@ -21,15 +21,28 @@ export const Content = styled.div`
 
 export const Text = styled.div`
     color:black;
+    background-color: white;
     font-weight: bold;
     font-size: 24px;
     margin-left: 5px;
 `;
 
 export const Check = styled.div`
-    width:50px;
-    height:50px;
-    background-color: red;
+    width:40px;
+    height:40px;
+    background-color: white;
     margin-left: auto;
-    margin-right: 10px;
+    margin-right: 15px;
+    font-size: 34px;
+    border:1px solid black;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 `;
+
+export const List =  styled.ul`
+    overflow-y: auto;
+`;
+
+export const Item = styled.li``;

@@ -1,6 +1,6 @@
 import { Wrapper,Content,TitleText, Edit, Form, Limit, NewTitle, Submit } from './Title.styles';
 import {useState} from 'react';
-import Modal from '../EditModal/EditModal';
+import Modal from '../Modal/Modal';
 
 export default function Title() {
     const [isOpen,setIsOpen] = useState(false);
