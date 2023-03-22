@@ -2,7 +2,12 @@ import { useState } from 'react'
 import Modal from '../Modal/Modal';
 import { Check, Content, Item, List, Text, Wrapper } from './TodoItem.styles'
 
-export default function TodoItem() {
+type Props = {
+    task:string;
+    details:any;
+}
+
+export default function TodoItem({task,details}:Props) {
     const [isOpen,setIsOpen] = useState(false);
     const [isDone,setIsDone] = useState(false);
 
@@ -17,7 +22,7 @@ export default function TodoItem() {
     <Wrapper>
         <Content>
             <Text onClick={() => setIsOpen(true)}>
-                Homework
+                {task}
             </Text>
             <Check onClick={()=>setIsDone(!isDone)}>
                 {isDone && <div>X</div>}
@@ -25,39 +30,7 @@ export default function TodoItem() {
             <Modal open={isOpen} onClose={onClose}>
                 More details:
                 <List>
-                    <Item>
-                        sasdasdasdas
-                    </Item>
-                    <Item>
-                        sasdasdasdas
-                    </Item> <Item>
-                        sasdasdasdas
-                    </Item>
-                    <Item>
-                        sasdasdasdas
-                    </Item>
-                    <Item>
-                        sasdasdasdas
-                    </Item>
-                    <Item>
-                        sasdasdasdas
-                    </Item> <Item>
-                        sasdasdasdas
-                    </Item>
-                    <Item>
-                        sasdasdasdas
-                    </Item>
-                    <Item>
-                        sasdasdasdas
-                    </Item>
-                    <Item>
-                        sasdasdasdas
-                    </Item> <Item>
-                        sasdasdasdas
-                    </Item>
-                    <Item>
-                        sasdasdasdas
-                    </Item>
+                    {details.map((detail:any,index:any)=><Item key={index}>{detail}</Item>)}
                 </List>
             </Modal>
         </Content>

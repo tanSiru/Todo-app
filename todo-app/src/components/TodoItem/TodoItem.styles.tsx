@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Wrapper = styled.div`
     width:100%;
     height: 75px;
-    
+    flex-shrink: 0;
 `;
 
 export const Content = styled.div`
@@ -28,8 +28,8 @@ export const Text = styled.div`
 `;
 
 export const Check = styled.div`
-    width:40px;
-    height:40px;
+    width:30px;
+    height:30px;
     background-color: white;
     margin-left: auto;
     margin-right: 15px;
