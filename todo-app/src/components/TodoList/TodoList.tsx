@@ -1,70 +1,142 @@
 import TodoItem from '../TodoItem/TodoItem'
-import { Content, Wrapper } from './TodoList.styles'
+import { Content, Refresh, Wrapper } from './TodoList.styles'
+import {useState} from 'react';
+var randomSentence = require('random-sentence');
 
-const data = [
-    {"task":"jaidjasdiajs",
+var data = [
+    {"task":randomSentence({min: 1, max: 3}),
     "details":[
-        "ijpdjiasasdad",
-        "ijijdadasd",
-        "ijdasijsdasd"
+        randomSentence({min: 1, max: 3}),
+        randomSentence({min: 3, max: 8}),
+        randomSentence({min: 3, max: 8})
     ]
+    ,
+    "completetion":false
     },
-    {"task":"jaidjasdiajs",
+    {"task":randomSentence({min: 1, max: 3}),
     "details":[
-        "ijpdjiasasdad",
-        "ijijdadasd",
-        "ijdasijsdasd"
+        randomSentence({min: 1, max: 3}),
+        randomSentence({min: 3, max: 8}),
+        randomSentence({min: 3, max: 8})
     ]
+    ,
+    "completetion":false
     },
-    {"task":"jaidjasdiajs",
+    {"task":randomSentence({min: 1, max: 3}),
     "details":[
-        "ijpdjiasasdad",
-        "ijijdadasd",
-        "ijdasijsdasd"
+        randomSentence({min: 1, max: 3}),
+        randomSentence({min: 3, max: 8}),
+        randomSentence({min: 3, max: 8})
     ]
+    ,
+    "completetion":false
     },
-    {"task":"jaidjasdiajs",
+    {"task":randomSentence({min: 1, max: 3}),
     "details":[
-        "ijpdjiasasdad",
-        "ijijdadasd",
-        "ijdasijsdasd"
+        randomSentence({min: 1, max: 3}),
+        randomSentence({min: 3, max: 8}),
+        randomSentence({min: 3, max: 8})
     ]
+    ,
+    "completetion":false
     },
-    {"task":"jaidjasdiajs",
+    {"task":randomSentence({min: 1, max: 3}),
     "details":[
-        "ijpdjiasasdad",
-        "ijijdadasd",
-        "ijdasijsdasd"
+        randomSentence({min: 1, max: 3}),
+        randomSentence({min: 3, max: 8}),
+        randomSentence({min: 3, max: 8})
     ]
+    ,
+    "completetion":false
     },
-    {"task":"jaidjasdiajs",
+    {"task":randomSentence({min: 1, max: 3}),
     "details":[
-        "ijpdjiasasdad",
-        "ijijdadasd",
-        "ijdasijsdasd"
+        randomSentence({min: 1, max: 3}),
+        randomSentence({min: 3, max: 8}),
+        randomSentence({min: 3, max: 8})
     ]
+    ,
+    "completetion":false
     },
-    {"task":"jaidjasdiajs",
+    {"task":randomSentence({min: 1, max: 3}),
     "details":[
-        "ijpdjiasasdad",
-        "ijijdadasd",
-        "ijdasijsdasd"
+        randomSentence({min: 1, max: 3}),
+        randomSentence({min: 3, max: 8}),
+        randomSentence({min: 3, max: 8})
     ]
+    ,
+    "completetion":false
     },
-    {"task":"jaidjasdiajs",
+    {"task":randomSentence({min: 1, max: 3}),
     "details":[
-        "ijpdjiasasdad",
-        "ijijdadasd",
-        "ijdasijsdasd"
+        randomSentence({min: 1, max: 3}),
+        randomSentence({min: 3, max: 8}),
+        randomSentence({min: 3, max: 8})
     ]
+    ,
+    "completetion":false
     },
+    {"task":randomSentence({min: 1, max: 3}),
+    "details":[
+        randomSentence({min: 1, max: 3}),
+        randomSentence({min: 3, max: 8}),
+        randomSentence({min: 3, max: 8})
+    ]
+    ,
+    "completetion":false
+    },
+    {"task":randomSentence({min: 1, max: 3}),
+    "details":[
+        randomSentence({min: 1, max: 3}),
+        randomSentence({min: 3, max: 8}),
+        randomSentence({min: 3, max: 8})
+    ]
+    ,
+    "completetion":false
+    },
+    {"task":randomSentence({min: 1, max: 3}),
+    "details":[
+        randomSentence({min: 1, max: 3}),
+        randomSentence({min: 3, max: 8}),
+        randomSentence({min: 3, max: 8})
+    ]
+    ,
+    "completetion":false
+    },
+    {"task":randomSentence({min: 1, max: 3}),
+    "details":[
+        randomSentence({min: 1, max: 3}),
+        randomSentence({min: 3, max: 8}),
+        randomSentence({min: 3, max: 8})
+    ]
+    ,
+    "completetion":false
+    },
+
 ]
 
 export default function TodoList() {
+    const [tasks,setTasks] = useState(data)
+
+
+    function timeout(delay: number) {
+        return new Promise( res => setTimeout(res, delay) );
+    }
+
+    async function handleDelete(key:any){
+        let temp = tasks.filter((task, _) => task.task !== key)
+        await timeout(1000) 
+        setTasks(temp)
+    }
+
+    function doRefresh(){
+        setTasks(data)
+    }
+
     return (
     <Wrapper>
         <Content>
-            {data.map((task,index:any)=><TodoItem key={index} task={task.task} details={task.details}/>)}
+            {tasks.map((task,_)=><TodoItem key={task.task} task={task.task} details={task.details} handleDelete={handleDelete} />)}
         </Content>
     </Wrapper>
     )

@@ -5,16 +5,20 @@ import { Check, Content, Item, List, Text, Wrapper } from './TodoItem.styles'
 type Props = {
     task:string;
     details:any;
+    handleDelete:Function;
 }
 
-export default function TodoItem({task,details}:Props) {
+export default function TodoItem({task,details,handleDelete}:Props) {
     const [isOpen,setIsOpen] = useState(false);
     const [isDone,setIsDone] = useState(false);
 
-
-
     function onClose(){
         setIsOpen(false);
+    }
+
+    function onChange(){
+        setIsDone(!isDone);
+        handleDelete(task)
     }
 
 
@@ -24,7 +28,7 @@ export default function TodoItem({task,details}:Props) {
             <Text onClick={() => setIsOpen(true)}>
                 {task}
             </Text>
-            <Check onClick={()=>setIsDone(!isDone)}>
+            <Check onClick={onChange}>
                 {isDone && <div>X</div>}
             </Check>
             <Modal open={isOpen} onClose={onClose}>

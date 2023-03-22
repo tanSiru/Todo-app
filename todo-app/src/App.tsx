@@ -1,5 +1,5 @@
 import './App.css';
-import AddItem from './components/AddItem/AddItem';
+import AddItem from './components/Modify/Modify';
 import Todo from './components/Todo/Todo';
 
 function App() {
