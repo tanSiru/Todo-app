@@ -13,17 +13,52 @@ export const Content = styled.div`
     overflow-y: auto;
 `;
 
+export const Modify = styled.div`
+    width:100%;
+    height:80px;
+    /* background-color: red; */
+    display:flex;
+    flex-direction: row;
+    justify-content: center; 
+    align-items: center;
+    border:1px solid black;
+`;
+
+export const TaskList= styled.div`
+    width:100%;
+    height:100%;
+    display:flex;
+    flex-direction: column;
+    overflow-y: auto;
+`;
+
+
 export const Refresh = styled.button`
-    width:150px;
-    height:100px;
+    width:70px;
+    height:50px;
     background-color: white;
     font-weight: bold;
-    font-size: 28px;
+    font-size: 15px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border-radius: 15px;
+    border-radius: 10px;
     margin-left: 20px;
-    border:1px solid black;
+    font-weight: bold;
+`;
+
+export const Add = styled.button`
+    width:70px;
+    height:50px;
+    background-color: white;
+    font-weight: bold;
+    font-size: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    font-weight: bold;
+
 `;

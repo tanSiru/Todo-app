@@ -1,5 +1,5 @@
 import TodoItem from '../TodoItem/TodoItem'
-import { Content, Refresh, Wrapper } from './TodoList.styles'
+import { Add, Content, Modify, Refresh, TaskList, Wrapper } from './TodoList.styles'
 import {useState} from 'react';
 var randomSentence = require('random-sentence');
 
@@ -124,9 +124,7 @@ export default function TodoList() {
     }
 
     async function handleDelete(key:any){
-        let temp = tasks.filter((task, _) => task.task !== key)
-        await timeout(1000) 
-        setTasks(temp)
+        data =  data.filter((task, _) => task.task !== key)
     }
 
     function doRefresh(){
@@ -136,7 +134,18 @@ export default function TodoList() {
     return (
     <Wrapper>
         <Content>
-            {tasks.map((task,_)=><TodoItem key={task.task} task={task.task} details={task.details} handleDelete={handleDelete} />)}
+            <Modify>
+                <Add>
+                    Add Item
+                </Add>
+                <Refresh onClick={doRefresh}>
+                    Refresh
+                </Refresh>
+            </Modify>
+            <TaskList>
+                {tasks.map((task,_)=><TodoItem key={task.task} task={task.task} details={task.details} handleDelete={handleDelete} />)}
+                
+            </TaskList>
         </Content>
     </Wrapper>
     )
