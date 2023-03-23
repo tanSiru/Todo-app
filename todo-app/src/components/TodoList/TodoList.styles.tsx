@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+type Props = {
+    limit:boolean;
+}
+
 export const Wrapper = styled.div`
     width: 100%;
     height:415px;
@@ -92,6 +96,7 @@ export const Form = styled.form`
     width:500px;
     height:300px;
     align-self: center;
+    font-size:18px;
 `;
 
 
@@ -111,10 +116,21 @@ export const Limit = styled.div`
     color:red;
 `;
 
-export const NewTask = styled.textarea`
+export const NewTask = styled.textarea<Props>`
     width:500px;
-    height:50px;
-    font-size:30px;
+    height:35px;
+    font-size:20px;
+    border:${props=>props.limit ? "1px solid red" : "1px solid black"};
+    :focus{
+        outline:none;
+    }
+    `;
+
+export const Detail = styled.textarea<Props>`
+    width:500px;
+    height:30px;
+    font-size:20px;
+    border:${props=>props.limit ? "1px solid red" : "1px solid black"};
     :focus{
         outline:none;
     }

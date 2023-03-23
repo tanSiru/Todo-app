@@ -45,8 +45,8 @@ export default function Title() {
         <Modal open={isOpen} onClose={onClose} handleChange={handleChange} text={text} limit={limit} onSubmit={onSubmit}>
             What would you like to change the title to?
 
-            <Form onSubmit={onSubmit}>
-                <NewTitle  limit={check} value={text} onChange={handleChange}/>
+            <Form onSubmit={onSubmit} >
+                <NewTitle  limit={check} value={text} onChange={handleChange} required/>
                 {check && <Limit>Max limit is {limit} chars!</Limit>}
                 <Submit/>
             </Form>

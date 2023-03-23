@@ -1,5 +1,5 @@
 import TodoItem from '../TodoItem/TodoItem'
-import { Add, Content, Empty, Modify, Refresh, Reset, TaskList, Wrapper, Form, Submit, Limit,  NewTask} from './TodoList.styles'
+import { Add, Content, Empty, Modify, Refresh, Reset, TaskList, Wrapper, Form, Submit, Limit,  NewTask, Detail} from './TodoList.styles'
 import {useState} from 'react';
 import Modal from '../Modal/Modal';
 var randomSentence = require('random-sentence');
@@ -119,12 +119,37 @@ var data = [
 export default function TodoList() {
     const [tasks,setTasks] = useState(data)
     const [isOpen,setIsOpen] = useState(false);
+    const[text,setText] = useState("");
+    const[detail1,setdDetail1] = useState("");
+    const[detail2,setdDetail2] = useState("");
+    const[detail3,setdDetail3] = useState("");
+
 
     const limit = 20;
-    // const check = text.length === limit ? true : false;
+    const check = text.length === limit ? true : false;
+    const check1 = detail1.length === limit ? true : false;
+    const check2 = detail2.length === limit ? true : false;
+    const check3 = detail3.length === limit ? true : false;
+
+    const final = check || check1 || check2 || check3;
+
 
     function handleChange(event:any) {
+        setText(event.target.value.slice(0, limit))
     }
+
+    function handleDetail1(event:any) {
+        setdDetail1(event.target.value.slice(0, limit))
+    }
+
+    function handleDetail2(event:any) {
+        setdDetail2(event.target.value.slice(0, limit))
+    }
+
+    function handleDetail3(event:any) {
+        setdDetail3(event.target.value.slice(0, limit))
+    }
+
 
 
     function onClose(){
@@ -133,7 +158,24 @@ export default function TodoList() {
 
     function onSubmit(event:any){
         event.preventDefault()
+        let temp =  {
+            "task":text,
+            "details":[
+                detail1,
+                detail2,
+                detail3,
+            ],
+        "completetion":false
+    }
+        data.push(temp);
         setIsOpen(false);
+        doRefresh();
+        setText("")
+        setdDetail1("")
+        setdDetail2("")
+        setdDetail3("")
+
+
     }
 
     async function handleDelete(key:any){
@@ -146,11 +188,10 @@ export default function TodoList() {
 
     function doReset(){
         setTasks([])
+        data = []
     }
 
-    function addItem(){
-
-    }
+        
 
     return (
     <Wrapper>
@@ -174,8 +215,18 @@ export default function TodoList() {
             What would you like to change the title to?
 
             <Form onSubmit={onSubmit}>
-                <NewTask/>
-                {/* {check && <Limit>Max limit is {limit} chars!</Limit>} */}
+                New Task:
+                <NewTask limit={final} value={text} onChange={handleChange} required/>
+
+                Detail 1
+                <Detail limit={final} value={detail1} onChange={handleDetail1}/>
+                Detail 2
+                <Detail limit={final} value={detail2} onChange={handleDetail2}/>
+                Detail 3
+                <Detail limit={final} value={detail3} onChange={handleDetail3}/>
+
+                {final && <Limit>Max limit is {limit} chars!</Limit>}
+
                 <Submit/>
             </Form>
         </Modal>
