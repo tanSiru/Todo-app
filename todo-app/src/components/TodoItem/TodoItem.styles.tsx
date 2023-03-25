@@ -46,3 +46,15 @@ export const List =  styled.ul`
 `;
 
 export const Item = styled.li``;
+
+export const Empty = styled.div`
+    width:100%;
+    height:100px;
+    color:black;
+    font-size:28px;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+`;

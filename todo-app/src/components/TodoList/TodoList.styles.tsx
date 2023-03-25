@@ -143,3 +143,12 @@ export const AddDetail = styled.button`
     border: 1px solid black;
     margin-right:10px;
 `;
+
+export const List =  styled.ul`
+    overflow-y: auto;
+    font-size:20px;
+    width:100%;
+    height:150px;
+`;
+
+export const Item = styled.li``;

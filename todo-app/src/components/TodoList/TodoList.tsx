@@ -1,5 +1,5 @@
 import TodoItem from '../TodoItem/TodoItem'
-import { Add, Content, Empty, Modify, Refresh, Reset, TaskList, Wrapper, Form, Submit, Limit,  NewTask, Detail, AddDetail} from './TodoList.styles'
+import { Add, Content, Empty, Modify, Refresh, Reset, TaskList, Wrapper, Form, Submit, Limit,  NewTask, Detail, AddDetail, List, Item} from './TodoList.styles'
 import {useState} from 'react';
 import Modal from '../Modal/Modal';
 var randomSentence = require('random-sentence');
@@ -143,7 +143,7 @@ export default function TodoList() {
     }
 
     function handleAddDetail(e:any){
-        setDetails(current => [...current,detail])
+        setDetails(details => [...details,detail])
         setDetail("")
         console.log(details)
         e.preventDefault();
@@ -165,6 +165,7 @@ export default function TodoList() {
         doRefresh();
         setText("")
         setDetail("")
+        setDetails([])
     }
 
     async function handleDelete(key:any){
@@ -203,19 +204,24 @@ export default function TodoList() {
             <Modal open={isOpen} onClose={onClose} handleChange={handleChange}  limit={limit} onSubmit={onSubmit}>
             What would you like to change the title to?
 
-            <Form onSubmit={onSubmit}>
-                New Task:
-                <NewTask limit={final} value={text} onChange={handleChange} required/>
+                <Form onSubmit={onSubmit}>
+                    New Task:
+                    <NewTask limit={final} value={text} onChange={handleChange} required/>
 
-                Detail 
-                <Detail limit={final} value={detail} onChange={handleDetail} required/>
-                {final && <Limit>Max limit is {limit} chars!</Limit>}
+                    Detail 
+                    <Detail limit={final} value={detail} onChange={handleDetail}/>
+                    {final && <Limit>Max limit is {limit} chars!</Limit>}
 
-                <AddDetail onClick={handleAddDetail}>
-                    Add Detail
-                </AddDetail>
-                <Submit/>
-            </Form>
+                    <AddDetail onClick={handleAddDetail}>
+                        Add Detail
+                    </AddDetail>
+                    <Submit/>
+                </Form>
+                <List>
+                    Details
+                    {details.map((detail:any,index:any)=><Item key={index}>{detail}</Item>)}
+                    {details.length === 0 && <Empty>Currently no details are recorded!</Empty>}
+                </List>
         </Modal>
         </Content>
     </Wrapper>

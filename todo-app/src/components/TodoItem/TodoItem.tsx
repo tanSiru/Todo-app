@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import Modal from '../Modal/Modal';
-import { Check, Content, Item, List, Text, Wrapper } from './TodoItem.styles'
+import { Check, Content, Empty, Item, List, Text, Wrapper } from './TodoItem.styles'
 
 type Props = {
     task:string;
@@ -35,6 +35,7 @@ export default function TodoItem({task,details,handleDelete}:Props) {
                 More details:
                 <List>
                     {details.map((detail:any,index:any)=><Item key={index}>{detail}</Item>)}
+                    {details.length === 0 && <Empty>Currently no details are recorded!</Empty>}
                 </List>
             </Modal>
         </Content>
