@@ -2,7 +2,8 @@ import TodoItem from '../TodoItem/TodoItem'
 import { Add, Content, Empty, Modify, Refresh, Reset, TaskList, Wrapper, Form, Submit, Limit,  NewTask, Detail, AddDetail, List, Item} from './TodoList.styles'
 import {useState} from 'react';
 import Modal from '../Modal/Modal';
-var randomSentence = require('random-sentence');
+import ModifyTask from '../Modify/Modify'
+var randomSentence = require('random-sentence')
 
 var data = [
     {"task":randomSentence({min: 1, max: 3}),
@@ -122,7 +123,7 @@ export default function TodoList() {
     const[text,setText] = useState("");
     const[detail,setDetail] = useState("");
     const[details,setDetails] = useState<string[]>([]);
-
+    const [focus,setFocus] = useState("");
     
 
 
@@ -181,9 +182,14 @@ export default function TodoList() {
         data = []
     }
 
+    function changeFocus(task:string){
+        setFocus(task)
+    }
+
         
 
     return (
+        <>
     <Wrapper>
         <Content>
             <Modify>
@@ -198,7 +204,7 @@ export default function TodoList() {
                 </Reset>
             </Modify>
             <TaskList>
-                {tasks.map((task,_)=><TodoItem key={task.task} task={task.task} details={task.details} handleDelete={handleDelete} />)}
+                {tasks.map((task,_)=><TodoItem key={task.task} task={task.task} details={task.details} handleDelete={handleDelete} changeFocus={changeFocus}/>)}
                 {tasks.length === 0 && <Empty>Currently no tasks are recorded!</Empty>}
             </TaskList>
             <Modal open={isOpen} onClose={onClose} handleChange={handleChange}  limit={limit} onSubmit={onSubmit}>
@@ -223,7 +229,14 @@ export default function TodoList() {
                     {details.length === 0 && <Empty>Currently no details are recorded!</Empty>}
                 </List>
         </Modal>
+
         </Content>
+        <ModifyTask>
+            NPC
+        </ModifyTask>
+
     </Wrapper>
+
+    </>
     )
 }

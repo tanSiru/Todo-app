@@ -6,9 +6,10 @@ type Props = {
     task:string;
     details:any;
     handleDelete:Function;
+    changeFocus:Function
 }
 
-export default function TodoItem({task,details,handleDelete}:Props) {
+export default function TodoItem({task,details,handleDelete, changeFocus}:Props) {
     const [isOpen,setIsOpen] = useState(false);
     const [isDone,setIsDone] = useState(false);
 
@@ -21,11 +22,16 @@ export default function TodoItem({task,details,handleDelete}:Props) {
         handleDelete(task)
     }
 
+    function handleClick(){
+        setIsOpen(true)
+        changeFocus(task)
+    }
+
 
     return (
     <Wrapper>
         <Content>
-            <Text onClick={() => setIsOpen(true)}>
+            <Text onClick={handleClick}>
                 {task}
             </Text>
             <Check onClick={onChange}>

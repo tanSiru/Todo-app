@@ -1,15 +1,10 @@
 import { Content, Wrapper, Add, Refresh } from './Modify.styles'
 
-export default function AddItem() {
+export default function Modify({children}:any) {
     return (
     <Wrapper>
         <Content>
-            <Add>
-                Add Item
-            </Add>
-            <Refresh>
-                Refresh
-            </Refresh>
+            {children}
         </Content>
     </Wrapper>
     )
