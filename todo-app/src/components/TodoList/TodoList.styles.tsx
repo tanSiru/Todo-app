@@ -101,7 +101,7 @@ export const Form = styled.form`
 
 
 export const Submit = styled.input.attrs({type:"submit"})`
-    height:25px;
+    height:35px;
     width:80px;
     border-radius: 15px;
     border: 1px solid black;
@@ -135,3 +135,11 @@ export const Detail = styled.textarea<Props>`
         outline:none;
     }
     `;
+
+export const AddDetail = styled.button`
+    width:80px;
+    height:35px;
+    border-radius:15px;
+    border: 1px solid black;
+    margin-right:10px;
+`;
