@@ -1,9 +1,15 @@
 import TodoItem from '../TodoItem/TodoItem'
 import { Add, Content, Empty, Modify, Refresh, Reset, TaskList, Wrapper, Form, Submit, Limit,  NewTask, Detail, AddDetail, List, Item} from './TodoList.styles'
-import {useState} from 'react';
+import {useState,useEffect} from 'react';
 import Modal from '../Modal/Modal';
 import ModifyTask from '../Modify/Modify'
 var randomSentence = require('random-sentence')
+
+type Todo = {
+    task: string;
+    details:any[];
+    completetion:boolean;
+}
 
 var data = [
     {"task":randomSentence({min: 1, max: 3}),
@@ -124,8 +130,14 @@ export default function TodoList() {
     const[detail,setDetail] = useState("");
     const[details,setDetails] = useState<string[]>([]);
     const [focus,setFocus] = useState("");
-    
+    const [focusDetail,setFocusDetail] = useState<Todo>(data[0]);
 
+    useEffect(()=>{
+
+        let temp = data.filter((task, _) => task.task === focus)
+        setFocusDetail(temp[0])
+    },[setFocusDetail,focusDetail,focus]);
+    
 
 
     const limit = 20;
@@ -184,6 +196,17 @@ export default function TodoList() {
 
     function changeFocus(task:string){
         setFocus(task)
+        // Focus()
+        // console.log(focusDetail)
+    }
+
+    function checkDuplicated(){
+
+    }
+
+    function Focus(){
+        let temp = data.filter((task, _) => task.task === focus)
+        setFocusDetail(temp[0])
     }
 
         
@@ -231,12 +254,17 @@ export default function TodoList() {
         </Modal>
 
         </Content>
-        <ModifyTask>
-            NPC
-        </ModifyTask>
+        {focusDetail && <ModifyTask >
+                {console.log(details)}
+            <List onClick={Focus}>
+                {focusDetail.details.map((detail:any,index:any)=><Item key={index}>{detail}</Item>)}
+            </List>
+        </ModifyTask>}
 
     </Wrapper>
 
     </>
     )
 }
+
+// {focusDetail.details.length === 0 && <Empty>Currently no details are recorded!</Empty>}
