@@ -152,3 +152,16 @@ export const List =  styled.ul`
 `;
 
 export const Item = styled.li``;
+
+export const Change = styled.input.attrs({type:"text"})`
+    width:70%;
+    height:100%;
+    font-size:20px;
+`;
+
+export const Button = styled.button`
+    width: 50px;
+    height: 50px;
+    background-color:red;
+
+`;

@@ -1,5 +1,5 @@
 import TodoItem from '../TodoItem/TodoItem'
-import { Add, Content, Empty, Modify, Refresh, Reset, TaskList, Wrapper, Form, Submit, Limit,  NewTask, Detail, AddDetail, List, Item} from './TodoList.styles'
+import { Add, Content, Empty, Modify, Refresh, Reset, TaskList, Wrapper, Form, Submit, Limit,  NewTask, Detail, AddDetail, List, Item, Change, Button} from './TodoList.styles'
 import {useState,useEffect} from 'react';
 import Modal from '../Modal/Modal';
 import ModifyTask from '../Modify/Modify'
@@ -129,16 +129,16 @@ export default function TodoList() {
     const[text,setText] = useState("");
     const[detail,setDetail] = useState("");
     const[details,setDetails] = useState<string[]>([]);
-    const [focus,setFocus] = useState("");
+    const [focus,setFocus] = useState(data[0].task);
     const [focusDetail,setFocusDetail] = useState<Todo>(data[0]);
+    const [detailList,setDetailList] = useState<string[]>(data[0].details);
 
     useEffect(()=>{
-
         let temp = data.filter((task, _) => task.task === focus)
         setFocusDetail(temp[0])
-    },[setFocusDetail,focusDetail,focus]);
+        setDetailList(temp[0].details)
+    },[setFocusDetail,focusDetail,focus, setDetailList]);
     
-
 
     const limit = 20;
     const check = text.length === limit ? true : false;
@@ -151,6 +151,14 @@ export default function TodoList() {
         setText(event.target.value.slice(0, limit))
     }
 
+    function handleDetailChange(event:any,index:any) {
+        let clone = [...detailList]
+        let text = clone[index]
+        text = event.target.value;
+        clone[index] = text
+        setDetailList([...clone])
+    }
+
     function handleDetail(event:any) {
         setDetail(event.target.value.slice(0, limit))
     }
@@ -158,7 +166,6 @@ export default function TodoList() {
     function handleAddDetail(e:any){
         setDetails(details => [...details,detail])
         setDetail("")
-        console.log(details)
         e.preventDefault();
     }
 
@@ -196,18 +203,22 @@ export default function TodoList() {
 
     function changeFocus(task:string){
         setFocus(task)
-        // Focus()
-        // console.log(focusDetail)
+    }
+
+    function submitDetailChange(){
+        let temp = data.filter((task, _) => task.task === focus)
+        let change = detailList
+        temp[0].details = change
+        let ind = data.findIndex(task => task.task === focus)
+        data.splice(ind,1)
+        data.splice(ind,0,temp[0])
+        doRefresh()
     }
 
     function checkDuplicated(){
 
     }
 
-    function Focus(){
-        let temp = data.filter((task, _) => task.task === focus)
-        setFocusDetail(temp[0])
-    }
 
         
 
@@ -255,10 +266,14 @@ export default function TodoList() {
 
         </Content>
         {focusDetail && <ModifyTask >
-                {console.log(details)}
-            <List onClick={Focus}>
-                {focusDetail.details.map((detail:any,index:any)=><Item key={index}>{detail}</Item>)}
+            <List >
+                {focusDetail.details.map((detail:any,index:any)=>
+                    <Item key={index}>
+                        <Change value={detailList[index]} onChange={(e)=>handleDetailChange(e,index)}/>
+                    </Item>
+                    )}
             </List>
+            <Button onClick={submitDetailChange}/>
         </ModifyTask>}
 
     </Wrapper>
@@ -267,4 +282,5 @@ export default function TodoList() {
     )
 }
 
-// {focusDetail.details.length === 0 && <Empty>Currently no details are recorded!</Empty>}
+
+// onChange={(e)=>handleDetailChange(e,index)}
