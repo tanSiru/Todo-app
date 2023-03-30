@@ -1,6 +1,6 @@
 import TodoItem from '../TodoItem/TodoItem'
 import { Add, Content, Empty, Modify, Refresh, Reset, TaskList, Wrapper, Form, Submit, Limit,  NewTask, Detail, AddDetail, List, Item, Change, Button} from './TodoList.styles'
-import {useState,useEffect} from 'react';
+import {useState,useEffect, useRef} from 'react';
 import Modal from '../Modal/Modal';
 import ModifyTask from '../Modify/Modify'
 var randomSentence = require('random-sentence')
@@ -132,12 +132,30 @@ export default function TodoList() {
     const [focus,setFocus] = useState(data[0].task);
     const [focusDetail,setFocusDetail] = useState<Todo>(data[0]);
     const [detailList,setDetailList] = useState<string[]>(data[0].details);
+    const [state,setState] = useState(false)
+    const ref = useRef("focus")
+    const detailref = useRef(detailList)
 
     useEffect(()=>{
-        let temp = data.filter((task, _) => task.task === focus)
-        setFocusDetail(temp[0])
-        setDetailList(temp[0].details)
-    },[setFocusDetail,focusDetail,focus, setDetailList]);
+        if(ref.current==="focus"){
+            let temp = data.filter((task, _) => task.task === focus)
+            setFocusDetail(temp[0])
+            setDetailList(temp[0].details)
+            detailref.current = temp[0].details
+        }
+        if(ref.current==="detail"){
+            console.log("as9djadsijasdijads")
+            ref.current = "focus"
+            // let temp = data.filter((task, _) => task.task === focus)
+            // let change = detailref.current
+            // temp[0].details = change
+            // let ind = data.findIndex(task => task.task === focus)
+            // data.splice(ind,1)
+            // data.splice(ind,0,temp[0])
+            // doRefresh()
+        }
+        
+    },[setFocusDetail, focusDetail, focus, setDetailList,state]);
     
 
     const limit = 20;
@@ -206,13 +224,8 @@ export default function TodoList() {
     }
 
     function submitDetailChange(){
-        let temp = data.filter((task, _) => task.task === focus)
-        let change = detailList
-        temp[0].details = change
-        let ind = data.findIndex(task => task.task === focus)
-        data.splice(ind,1)
-        data.splice(ind,0,temp[0])
-        doRefresh()
+        ref.current = "detail"
+        setState(!state)
     }
 
     function checkDuplicated(){
