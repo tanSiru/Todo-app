@@ -129,9 +129,9 @@ export default function TodoList() {
     const[text,setText] = useState("");
     const[detail,setDetail] = useState("");
     const[details,setDetails] = useState<string[]>([]);
-    const [focus,setFocus] = useState(data[0].task);
+    const [focus,setFocus] = useState(data.length===0 ? [] : data[0].task);
     const [focusDetail,setFocusDetail] = useState<Todo>(data[0]);
-    const [detailList,setDetailList] = useState<string[]>(data[0].details);
+    const [detailList,setDetailList] = useState<string[]>(data.length===0 ? [] : data[0].details);
     const [state,setState] = useState(false)
     const ref = useRef("focus")
     const detailref = useRef(detailList)
@@ -144,11 +144,9 @@ export default function TodoList() {
             detailref.current = temp[0].details
         }
         if(ref.current==="detail"){
-            console.log("as9djadsijasdijads")
             ref.current = "focus"
             let temp = data.filter((task, _) => task.task === focus)
             let change = detailref.current
-            console.log(change)
             temp[0].details = change
             let ind = data.findIndex(task => task.task === focus)
             data.splice(ind,1)
@@ -218,6 +216,7 @@ export default function TodoList() {
     }
 
     function doReset(){
+        // setFocus([])
         setTasks([])
         data = []
     }

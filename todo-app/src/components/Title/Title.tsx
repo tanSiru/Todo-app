@@ -13,7 +13,6 @@ export default function Title() {
 
     function handleChange(event:any) {
         setText(event.target.value.slice(0, limit))
-        console.log(text.length)
     }
 
     function onClose(){
