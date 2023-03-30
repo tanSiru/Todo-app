@@ -146,13 +146,14 @@ export default function TodoList() {
         if(ref.current==="detail"){
             console.log("as9djadsijasdijads")
             ref.current = "focus"
-            // let temp = data.filter((task, _) => task.task === focus)
-            // let change = detailref.current
-            // temp[0].details = change
-            // let ind = data.findIndex(task => task.task === focus)
-            // data.splice(ind,1)
-            // data.splice(ind,0,temp[0])
-            // doRefresh()
+            let temp = data.filter((task, _) => task.task === focus)
+            let change = detailref.current
+            console.log(change)
+            temp[0].details = change
+            let ind = data.findIndex(task => task.task === focus)
+            data.splice(ind,1)
+            data.splice(ind,0,temp[0])
+            doRefresh()
         }
         
     },[setFocusDetail, focusDetail, focus, setDetailList,state]);
@@ -175,6 +176,8 @@ export default function TodoList() {
         text = event.target.value;
         clone[index] = text
         setDetailList([...clone])
+        detailref.current = [...clone]
+
     }
 
     function handleDetail(event:any) {
