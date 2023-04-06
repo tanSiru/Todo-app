@@ -1,1 +1,1 @@
-# Todo-app
+npm install && npm start
